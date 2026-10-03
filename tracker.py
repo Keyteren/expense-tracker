@@ -50,3 +50,11 @@ print("-" * 40)
 
 # Footer
 print("Made by: Katherine C. Salvacion | Installment 2")
+
+
+
+
+
+
+
+# Temp
