@@ -49,4 +49,4 @@ print("Average:\t\t$" + str(average))
 print("-" * 40)
 
 # Footer
-print("Made by: Katherine C. Salvacio | Installment 2")
+print("Made by: Katherine C. Salvacion | Installment 2")
