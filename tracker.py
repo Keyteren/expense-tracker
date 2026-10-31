@@ -1,6 +1,6 @@
-# Project: Expense Tracker - Installment 3
+# Project: Expense Tracker - Installment 4
 # Author: Katherine C. Salvacion
-# Description: Tracker takes input, applies tax, checks budget
+# Description: Tracker takes input, applies tax, checks budget, and makes decisions
 
 # Top banner
 print("=" * 40)
@@ -30,15 +30,39 @@ print("Welcome,", name + "!", "Let's log two expenses.")
 # Start subtotal at 0
 subtotal = 0
 
-# Ask for first expense and update subtotal right after
+# Ask for first expense and update subtotal
 item1 = input("First expense? ")
 amount1 = float(input("Amount? "))
 subtotal = subtotal + amount1
 
-# Ask for second expense and update subtotal right after
+# Check size of first expense
+if amount1 > 200:
+    print("  Huge expense - are you sure?")
+elif amount1 > 100:
+    print("  Big expense.")
+elif amount1 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
+
+# Ask for second expense and update subtotal
 item2 = input("Second expense? ")
 amount2 = float(input("Amount? "))
 subtotal = subtotal + amount2
+
+# Check size of second expense
+if amount2 > 200:
+    print("  Huge expense - are you sure?")
+elif amount2 > 100:
+    print("  Big expense.")
+elif amount2 > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
+
+# Check if both expenses are over 100
+if amount1 > 100 and amount2 > 100:
+    print("  Two big expenses in a row - slow down!")
 
 # Compute average from subtotal
 average = subtotal / 2
@@ -53,10 +77,10 @@ grand_total = subtotal + tax
 # Ask for budget
 budget = float(input("Your budget? "))
 
-# Over budget? True / False
+# Check if over budget
 over_budget = grand_total > budget
 
-# Left in budget 
+# Calculate amount left in budget
 left = budget - grand_total
 
 # Summary
@@ -69,13 +93,16 @@ print("\tSubtotal:\t$" + str(subtotal))
 print("\tAverage:\t$" + str(average))
 print("\tTax", "(" + str(tax_percent) + ".0%):\t$" + str(tax))
 print("\tGrand total:\t$" + str(grand_total))
-print("\tOver budget?:\t" + str(over_budget))
-print("\tLeft in budget:\t$" + str(left))
+
+# Give one budget verdict
+if over_budget:
+    print("Over budget by $" + str(grand_total - budget) + "!")
+elif grand_total > budget * 0.90:
+    print("Careful: only $" + str(left) + " left.")
+else:
+    print("Within budget. $" + str(left) + " left.")
+
 print("-" * 40)
 
 # Footer
-print("Made by: Katherine C. Salvacion | Installment 3")
-
-
-
-# Temp
+print("Made by: Katherine C. Salvacion | Installment 4")
