@@ -1,6 +1,7 @@
-# Project: Expense Tracker - Installment 4
+
+# Project: Expense Tracker - Installment 5
 # Author: Katherine C. Salvacion
-# Description: Tracker takes input, applies tax, checks budget, and makes decisions
+# Description: Tracker uses a menu to add expenses, view totals, and check budget
 
 # Top banner
 print("=" * 40)
@@ -12,97 +13,81 @@ print("\tKnow where your money goes.")
 # Bottom banner
 print("=" * 40)
 
-# Main menu
-print()
-print("MAIN MENU")
-print("\t[1] Add an expense\t(coming soon)")
-print("\t[2] View all expenses\t(coming soon)")
-print("\t[3] Show total spent\t(coming soon)")
-print("\t[4] Exit\t\t(coming soon)")
-print()
-
-# Ask for the user's name
+# Ask for setup information
 name = input("What's your name? ")
-
-# Personal greeting
-print("Welcome,", name + "!", "Let's log two expenses.")
-
-# Start subtotal at 0
-subtotal = 0
-
-# Ask for first expense and update subtotal
-item1 = input("First expense? ")
-amount1 = float(input("Amount? "))
-subtotal = subtotal + amount1
-
-# Check size of first expense
-if amount1 > 200:
-    print("  Huge expense - are you sure?")
-elif amount1 > 100:
-    print("  Big expense.")
-elif amount1 > 50:
-    print("  Moderate expense.")
-else:
-    print("  Small expense.")
-
-# Ask for second expense and update subtotal
-item2 = input("Second expense? ")
-amount2 = float(input("Amount? "))
-subtotal = subtotal + amount2
-
-# Check size of second expense
-if amount2 > 200:
-    print("  Huge expense - are you sure?")
-elif amount2 > 100:
-    print("  Big expense.")
-elif amount2 > 50:
-    print("  Moderate expense.")
-else:
-    print("  Small expense.")
-
-# Check if both expenses are over 100
-if amount1 > 100 and amount2 > 100:
-    print("  Two big expenses in a row - slow down!")
-
-# Compute average from subtotal
-average = subtotal / 2
-
-# Ask for tax rate (whole number)
 tax_percent = int(input("Tax rate %? "))
-
-# Compute tax and grand total
-tax = subtotal * tax_percent / 100
-grand_total = subtotal + tax
-
-# Ask for budget
 budget = float(input("Your budget? "))
 
-# Check if over budget
-over_budget = grand_total > budget
+# Welcome message
+print("Welcome,", name + "!")
 
-# Calculate amount left in budget
-left = budget - grand_total
+# Initialize expense tracking variables
+subtotal = 0
+count = 0
 
-# Summary
-print()
-print("-" * 40)
-print("SUMMARY")
-print("\t-", item1 + ":\t$" + str(amount1))
-print("\t-", item2 + ":\t$" + str(amount2))
-print("\tSubtotal:\t$" + str(subtotal))
-print("\tAverage:\t$" + str(average))
-print("\tTax", "(" + str(tax_percent) + ".0%):\t$" + str(tax))
-print("\tGrand total:\t$" + str(grand_total))
+# Main menu loop
+while True:
+    print()
+    print("MAIN MENU")
+    print("\t[1] Add an expense")
+    print("\t[2] View all expenses (coming soon)")
+    print("\t[3] Show total spent")
+    print("\t[4] Exit")
 
-# Give one budget verdict
-if over_budget:
-    print("Over budget by $" + str(grand_total - budget) + "!")
-elif grand_total > budget * 0.90:
-    print("Careful: only $" + str(left) + " left.")
-else:
-    print("Within budget. $" + str(left) + " left.")
+    choice = input("Choose 1-4: ")
 
-print("-" * 40)
+    # Option 1: Add an expense
+    if choice == "1":
+        amount = float(input("Amount? "))
 
-# Footer
-print("Made by: Katherine C. Salvacion | Installment 4")
+        # Update subtotal and count
+        subtotal = subtotal + amount
+        count = count + 1
+
+        # Check expense size
+        if amount > 200:
+            print("  Huge expense - are you sure?")
+        elif amount > 100:
+            print("  Big expense.")
+        elif amount > 50:
+            print("  Moderate expense.")
+        else:
+            print("  Small expense.")
+
+    # Option 2: View all expenses
+    elif choice == "2":
+        print("Coming soon: the tracker can't remember each item yet.")
+
+    # Option 3: Show total spent
+    elif choice == "3":
+        tax = subtotal * tax_percent / 100
+        grand_total = subtotal + tax
+
+        # Display expense summary
+        print()
+        print(f"{'Expenses:':<16}{count}")
+        print(f"{'Subtotal:':<16}${subtotal:.1f}")
+        print(f"{f'Tax ({tax_percent:.1f}%):':<16}${tax:.1f}")
+        print(f"{'Grand total:':<16}${grand_total:.1f}")
+
+        # Check budget
+        over_budget = grand_total > budget
+
+        if over_budget:
+            print(f"Over budget by ${grand_total - budget:.1f}!")
+        elif grand_total > budget * 0.9:
+            print(f"Careful: only ${budget - grand_total:.1f} left.")
+        else:
+            print(f"Within budget. ${budget - grand_total:.1f} left.")
+
+    # Option 4: Exit
+    elif choice == "4":
+        print("Goodbye,", name + "!")
+        print("-" * 40)
+        print("Made by: Katherine C. Salvacion | Installment 5")
+        print("=" * 40)
+        break
+
+    # Invalid choice
+    else:
+        print("Please choose 1, 2, 3 or 4.")
